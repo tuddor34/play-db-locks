@@ -3,8 +3,8 @@ package play.domain;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "student")
-public class StudentEntity {
+@Table(schema = "domain", name = "user")
+public class UserEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -14,13 +14,13 @@ public class StudentEntity {
     private String firstName;
     @Column(name = "last_name")
     private String lastName;
-    @Column(name = "grade")
-    private Integer grade;
+    @Column(name = "balance")
+    private Integer balance;
     @Column(name = "version")
     @Version
     private Integer version;
 
-    public StudentEntity() {
+    public UserEntity() {
     }
 
 
@@ -46,5 +46,21 @@ public class StudentEntity {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public Integer getBalance() {
+        return balance;
+    }
+
+    public void setBalance(Integer balance) {
+        this.balance = balance;
+    }
+
+    public Integer getVersion() {
+        return version;
+    }
+
+    public void setVersion(Integer version) {
+        this.version = version;
     }
 }

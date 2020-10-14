@@ -1,0 +1,2 @@
+docker container stop play_lock_container
+docker container rm play_lock_container

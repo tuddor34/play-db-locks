@@ -1,0 +1,1 @@
+docker logs -f play_lock_container
