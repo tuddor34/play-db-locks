@@ -1,0 +1,10 @@
+PUT http://localhost:8080/tasks
+Content-Type: application/json
+
+{
+  "user_id": 1,
+  "task_id": "user_task_1602795898",
+  "user_input": "hula hoop 2"
+}
+
+###

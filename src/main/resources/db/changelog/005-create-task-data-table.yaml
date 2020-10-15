@@ -16,7 +16,7 @@ databaseChangeLog:
                     - unique: true
                     - nullable: false
               - column:
-                  name: task_data
+                  name: user_input
                   type: text
               - column:
                   name: status
@@ -27,3 +27,15 @@ databaseChangeLog:
               - column:
                   name: finish_timestamp
                   type: bigint
+              - column:
+                  name: completed_by
+                  type: bigint
+
+        - addForeignKeyConstraint:
+            baseTableSchemaName: domain
+            baseTableName: task_data
+            baseColumnNames: completed_by
+            referencedTableSchemaName: domain
+            referencedTableName: user
+            referencedColumnNames: id
+            constraintName: task_completed_by_user
