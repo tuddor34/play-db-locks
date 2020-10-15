@@ -1,5 +1,7 @@
 package play.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import play.UserRepository;
@@ -12,6 +14,7 @@ import java.util.Optional;
 @Service
 public class UserService {
 
+    private Logger log = LoggerFactory.getLogger(UserService.class);
     private final UserRepository userRepository;
 
     public UserService(UserRepository userRepository) {
@@ -71,7 +74,11 @@ public class UserService {
         int newBalance = userFromDb.getBalance() != null ? userFromDb.getBalance() + amount : amount;
         userFromDb.setBalance(newBalance);
 
-        return userRepository.save(userFromDb);
+        userRepository.save(userFromDb);
+
+        log.info("Number of users is: {}", userRepository.count());;
+
+        return userFromDb;
     }
 
 }
