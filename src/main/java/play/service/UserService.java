@@ -10,6 +10,9 @@ import play.domain.UserEntity;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.concurrent.TimeUnit;
+
+import static java.util.concurrent.TimeUnit.SECONDS;
 
 @Service
 public class UserService {
@@ -66,19 +69,30 @@ public class UserService {
     }
 
     @Transactional
-    public UserEntity increaseBalance(Long id, int amount) {
+    public UserEntity increaseBalance(Long id, int amount, boolean slow) {
         UserEntity userFromDb = userRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("User with id " + id + " not found in db."));
 
 
         int newBalance = userFromDb.getBalance() != null ? userFromDb.getBalance() + amount : amount;
         userFromDb.setBalance(newBalance);
-
+        if (slow) {
+            sleep(SECONDS, 15);
+        }
         userRepository.save(userFromDb);
 
-        log.info("Number of users is: {}", userRepository.count());;
+        log.info("Number of users is: {}", userRepository.count());
 
         return userFromDb;
+    }
+
+
+    private void sleep(TimeUnit timeUnit, long amount) {
+        try {
+            timeUnit.sleep(amount);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
 }

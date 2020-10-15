@@ -40,7 +40,18 @@ public class UserController {
         Integer amount = Optional.ofNullable(requestBody.get("amount"))
                 .orElseThrow(() -> new IllegalArgumentException("Missing amount parameter"));
 
-        return userService.increaseBalance(id, amount);
+        return userService.increaseBalance(id, amount, false);
     }
+
+
+    @PutMapping("/users/{id}/increase-balance-slow")
+    public UserEntity increaseBalanceSlow(@PathVariable(name = "id") Long id,
+                                          @RequestBody Map<String, Integer> requestBody) {
+        Integer amount = Optional.ofNullable(requestBody.get("amount"))
+                .orElseThrow(() -> new IllegalArgumentException("Missing amount parameter"));
+
+        return userService.increaseBalance(id, amount, true);
+    }
+
 
 }
