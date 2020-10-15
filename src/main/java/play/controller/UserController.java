@@ -30,7 +30,7 @@ public class UserController {
 
     @PutMapping("/users/{id}")
     public UserEntity updateStudent(@PathVariable(name = "id") Long id,
-                                    @RequestBody Map<String, Object> requestBody) throws InterruptedException {
+                                    @RequestBody Map<String, Object> requestBody) {
         return userService.updateUser(id, requestBody);
     }
 
