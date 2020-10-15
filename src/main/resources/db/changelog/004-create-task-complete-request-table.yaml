@@ -1,0 +1,47 @@
+databaseChangeLog:
+  - changeSet:
+      id: 004-create task complete request table
+      author: iovan
+      changes:
+        - createTable:
+            remarks: task table
+            schemaName: domain
+            tableName: task_complete_request
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  constraints:
+                    - primaryKey: true
+                    - unique: true
+                    - nullable: false
+              - column:
+                  name: task_id
+                  type: text
+              - column:
+                  name: status
+                  type: text
+              - column:
+                  name: user_id
+                  type: bigint
+              - column:
+                  name: time_stamp_ms
+                  type: bigint
+              - column:
+                  name: version
+                  type: bigint
+
+        - addUniqueConstraint:
+            tableName: task_complete_request
+            schemaName: domain
+            columnNames: task_id
+            constraintName: unique_task_id
+
+        - addForeignKeyConstraint:
+            baseTableSchemaName: domain
+            baseTableName: task_complete_request
+            baseColumnNames: user_id
+            referencedTableSchemaName: domain
+            referencedTableName: user
+            referencedColumnNames: id
+            constraintName: task_request_comes_from_user

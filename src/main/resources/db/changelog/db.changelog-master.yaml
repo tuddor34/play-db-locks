@@ -1,10 +1,16 @@
 databaseChangeLog:
   - include:
-        file: 001-create-schema-domain.sql
-        relativeToChangelogFile: true
+      file: 001-create-schema-domain.sql
+      relativeToChangelogFile: true
   - include:
       file: 002-create-hibernate-sequence.sql
       relativeToChangelogFile: true
   - include:
       file: 003-create-user-table.yaml
+      relativeToChangelogFile: true
+  - include:
+      file: 004-create-task-complete-request-table.yaml
+      relativeToChangelogFile: true
+  - include:
+      file: 005-create-task-data-table.yaml
       relativeToChangelogFile: true

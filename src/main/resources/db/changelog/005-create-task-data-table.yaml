@@ -1,0 +1,29 @@
+databaseChangeLog:
+  - changeSet:
+      id: 005-create task data table
+      author: iovan
+      changes:
+        - createTable:
+            remarks: task data table
+            schemaName: domain
+            tableName: task_data
+            columns:
+              - column:
+                  name: task_id
+                  type: text
+                  constraints:
+                    - primaryKey: true
+                    - unique: true
+                    - nullable: false
+              - column:
+                  name: task_data
+                  type: text
+              - column:
+                  name: status
+                  type: text
+              - column:
+                  name: open_timestamp
+                  type: bigint
+              - column:
+                  name: finish_timestamp
+                  type: bigint
